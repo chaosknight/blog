@@ -1,11 +1,12 @@
 package admin
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/jxufeliujj/blog/models"
+	"blog/models"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/astaxie/beego"
 )
 
 const (
@@ -70,7 +71,7 @@ func (this *baseController) display(tpl ...string) {
 	this.Data["adminid"] = this.userid
 	this.Data["adminname"] = this.username
 	this.Layout = this.moduleName + "/layout.html"
-	this.TplNames = tplname
+	this.TplName = tplname
 }
 
 //显示错误提示
@@ -83,7 +84,7 @@ func (this *baseController) showmsg(msg ...string) {
 	this.Data["msg"] = msg[0]
 	this.Data["redirect"] = msg[1]
 	this.Layout = this.moduleName + "/layout.html"
-	this.TplNames = this.moduleName + "/" + "showmsg.html"
+	this.TplName = this.moduleName + "/" + "showmsg.html"
 	this.Render()
 	this.StopRun()
 }

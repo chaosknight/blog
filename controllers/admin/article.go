@@ -1,16 +1,17 @@
 package admin
 
 import (
+	"blog/models"
 	"fmt"
-	"github.com/astaxie/beego/orm"
-	"github.com/jxufeliujj/blog/models"
-	"github.com/nfnt/resize"
 	"image/jpeg"
 	"io"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/astaxie/beego/orm"
+	"github.com/nfnt/resize"
 )
 
 type ArticleController struct {
@@ -156,7 +157,7 @@ func (this *ArticleController) Save() {
 			var tagpostobj models.TagPost
 			oldtags := strings.Split(strings.Trim(post.Tags, ","), ",")
 			//标签统计-1
-			tagobj.Query().Filter("name__in", oldtags).Update(orm.Params{"count": orm.ColValue(orm.Col_Minus, 1)})
+			tagobj.Query().Filter("name__in", oldtags).Update(orm.Params{"count": orm.ColValue(orm.ColMinus, 1)})
 			//删掉tag_post表的记录
 			tagpostobj.Query().Filter("postid", post.Id).Delete()
 		}
@@ -280,7 +281,7 @@ func (this *ArticleController) Upload() {
 		}
 	}
 	this.Data["json"] = out
-	this.ServeJson()
+	this.ServeJSON()
 }
 
 func createSmallPic(file io.Reader, fileSmall string, w, h int) error {

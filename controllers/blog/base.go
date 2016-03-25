@@ -1,10 +1,11 @@
 package blog
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/jxufeliujj/blog/models"
+	"blog/models"
 	"strconv"
 	"strings"
+
+	"github.com/astaxie/beego"
 )
 
 type baseController struct {
@@ -50,8 +51,8 @@ func (this *baseController) display(tpl string) {
 	}
 
 	this.Layout = theme + "/layout.html"
-	this.Data["root"] = "/" + beego.ViewsPath + "/" + theme + "/"
-	this.TplNames = theme + "/" + tpl + ".html"
+	this.Data["root"] = "/static/"
+	this.TplName = theme + "/" + tpl + ".html"
 
 	this.LayoutSections = make(map[string]string)
 	this.LayoutSections["head"] = theme + "/head.html"

@@ -1,9 +1,10 @@
 package admin
 
 import (
-	"github.com/astaxie/beego/validation"
-	"github.com/jxufeliujj/blog/models"
+	"blog/models"
 	"strings"
+
+	"github.com/astaxie/beego/validation"
 )
 
 type UserController struct {

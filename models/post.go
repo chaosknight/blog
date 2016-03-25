@@ -3,9 +3,10 @@ package models
 import (
 	"bytes"
 	"fmt"
-	"github.com/astaxie/beego/orm"
 	"strings"
 	"time"
+
+	"github.com/astaxie/beego/orm"
 )
 
 type Post struct {
@@ -56,7 +57,7 @@ func (m *Post) Delete() error {
 		o := orm.NewOrm()
 		oldtags := strings.Split(strings.Trim(m.Tags, ","), ",")
 		//标签统计-1
-		o.QueryTable(&Tag{}).Filter("name__in", oldtags).Update(orm.Params{"count": orm.ColValue(orm.Col_Minus, 1)})
+		o.QueryTable(&Tag{}).Filter("name__in", oldtags).Update(orm.Params{"count": orm.ColValue(orm.ColMinus, 1)})
 		//删掉tag_post表的记录
 		o.QueryTable(&TagPost{}).Filter("postid", m.Id).Delete()
 	}
